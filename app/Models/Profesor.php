@@ -9,6 +9,8 @@ class Profesor extends Model
 {
     use HasFactory;
 
+    protected $table = 'profesores';//Prote
+
     protected $fillable = [
         'id_profesor',
         'nombre',
@@ -21,5 +23,6 @@ class Profesor extends Model
     public $incrementing = true;
 
     public $timestamps = false;
+    
 }
 

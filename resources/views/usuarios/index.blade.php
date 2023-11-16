@@ -17,12 +17,12 @@
                       <br>
                       </div>
 
-                         <!-- <form  class="d-flex">
-                         <a class="btn btn-warning" href="{{ route('usuarios.create') }}">Nuevo</a>
-                         &emsp;
+                        <!-- <form  class="d-flex">
+                        <a class="btn btn-warning" href="{{ route('usuarios.create') }}">Nuevo</a>
+                        &emsp;
                           <input class="form-control me-2 light-table-filter" data-table="table_id" type="text" placeholder="Ingresa el nombre a buscar...">
 
-                         </form> -->
+                        </form> -->
 
 
 
