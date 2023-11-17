@@ -12,6 +12,6 @@ class Curso extends Model
     protected $fillable = [
         'nombre',
         'descripcion',
-        'deracion',
+        'duracion',
     ];
 }
