@@ -3,112 +3,71 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use Spatie\Permission\Models\Profesor;
+use App\Models\Curso; // Agregar la importación de la clase Curso
+use App\Models\Profesor; // Agregar la importación de la clase Profesor
 use Illuminate\Support\Facades\DB;
 
 class CursoController extends Controller
 {
-
-    function _construct(){
+    public function __construct()
+    {
         $this->middleware('permission:ver-curso|crear-curso|editar-curso|borrar-curso', ['only' => ['index']]);
         $this->middleware('permission:crear-curso', ['only' => ['create','store']]);
         $this->middleware('permission:editar-curso', ['only' => ['edit','update']]);
         $this->middleware('permission:borrar-curso', ['only' => ['destroy']]);
-
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $cursos = Curso::paginate(10);
-        return view('cursos.index',compact('cursos'));
+        return view('cursos.index', compact('cursos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $curso = Curso::get();
-        return view('cursos.crear',compact('cursos'));
+        $cursos = Curso::all();
+        return view('cursos.crear', compact('cursos'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        // Aquí debes implementar la lógica para almacenar un nuevo curso
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        // Implementar la lógica para mostrar un curso específico
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $cursos = Profesor::find($id);
-        $rolePermissions = DB::table("nombre")->where("nombre.id_Curso",$id)
-            //->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
-            ->all();
-    
-        return view('cursos.editar',compact('nombre','descripcion','duracion'));
+        $curso = Curso::find($id);
+        // Ajustar las siguientes líneas según tus necesidades
+        $nombre = $curso->nombre;
+        $descripcion = $curso->descripcion;
+        $duracion = $curso->duracion;
+
+        return view('cursos.editar', compact('nombre', 'descripcion', 'duracion'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        // Aquí debes implementar la lógica para actualizar un curso
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $this->validate($request, [
             'nombre' => 'required',
-           // 'apellidos' => 'required',
+            // 'apellidos' => 'required',
         ]);
 
         $curso = Curso::find($id);
-        $curso->name = $request->input('nombre');
+        $curso->nombre = $request->input('nombre');
         $curso->save();
-    
-        $curso->syncPermissions($request->input('permission'));
-    
-        return redirect()->route('cursos.index');  
-    
+
+        // Aquí debes implementar la lógica para sincronizar permisos (si es necesario)
+
+        return redirect()->route('cursos.index');
     }
 }

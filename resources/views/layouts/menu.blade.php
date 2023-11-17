@@ -17,4 +17,7 @@
     <a class="nav-link" href="/profesores">
         <i class="fas fa-users"></i><span>Profesores</span>
     </a>
+    <a class="nav-link" href="/cursos">
+        <i class="fas fa-building"></i><span>Cursos</span>
+    </a>
 </li>

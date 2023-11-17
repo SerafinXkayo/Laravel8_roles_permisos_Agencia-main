@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,12 +14,9 @@ class CreateProfesoresTable extends Migration
     {
         Schema::create('profesores', function (Blueprint $table) {
             $table->bigIncrements('id_profesor');
-            //$table->primary('id');
             $table->string('nombre');
             $table->string('apellido_paterno');
             $table->string('apellido_materno');
-
-        
         });
     }
 

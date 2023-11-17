@@ -21,7 +21,7 @@ class ProfesorController extends Controller
      */
     public function index()
     {
-        $profesores = Profesor::paginate(10);
+        $profesores = Profesor::all();
         return view('profesores.index',compact('profesores'));
     }
 
@@ -32,8 +32,7 @@ class ProfesorController extends Controller
      */
     public function create()
     {
-        $profesores = Profesor::get();
-        return view('profesores.crear',compact('profesores'));
+        return view('profesores.crear');
     }
 
     /**
@@ -44,8 +43,11 @@ class ProfesorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    
+        Profesor::create($request->all());
+        return redirect()->route('profesores.index');
     }
+    
 
     /**
      * Display the specified resource.
@@ -64,14 +66,9 @@ class ProfesorController extends Controller
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-public function edit($id)
+public function edit(Profesor $profesor)
 {
-    $profesor = Profesor::find($id);
-    $rolePermissions = DB::table("profesores")->where("profesores.id_profesor", $id)
-        ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-        ->all();
-
-    return view('profesores.editar', compact('profesor', 'rolePermissions'));
+    return view('profesores.editar', compact('profesor'));
 }
 
 /**
@@ -83,17 +80,12 @@ public function edit($id)
  */
 public function update(Request $request, $id)
 {
-    $this->validate($request, [
-        'nombre' => 'required',
-    ]);
+    
+}
 
-    $profesor = Profesor::find($id);
-    $profesor->nombre = $request->input('nombre');
-    $profesor->save();
-
-    // Asumo que $request->input('permission') es un array de permisos, 
-    // si es diferente, ajusta esta línea según tus necesidades.
-    $profesor->syncPermissions($request->input('permission'));
+public function destroy(Profesor $profesor)
+{
+    $profesor->delete();
 
     return redirect()->route('profesores.index');
 }
