@@ -21,10 +21,8 @@ class CreateGruposTable extends Migration
             $table-> date ('hora_inicio');
             $table-> date ('hora_fin');
 
-            $table->unsignedBigInteger('profesor_id');
-            $table->unsignedBigInteger('curso_id');
-            $table->foreign('profesor_id')->references('id_profesor')->on('profesores');
-            $table->foreign('curso_id')->references('id_curso')->on('cursos');
+            $table->foreignId('profesor_id')->constrained('profesores', 'id_profesor');
+            $table->foreignId('curso_id')->constrained('cursos', 'id_curso');
 
         });
     }

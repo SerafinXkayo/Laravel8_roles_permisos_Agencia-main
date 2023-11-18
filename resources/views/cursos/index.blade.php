@@ -11,7 +11,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <a class="btn btn-warning" href="{{ route('cursos.create') }}" title="Crear nuevo curso">Nuevo curso</a>
+                            <a class="btn btn-warning" href="{{ route('cursos.create') }}" title="Crear nuevo curso">+ Nuevo curso</a>
                             <div>
                                 <br>
                             </div>
@@ -21,6 +21,7 @@
                                     <th style="color:#fff;">Nombre</th>
                                     <th style="color:#fff;">Descripcion</th>
                                     <th style="color:#fff;">Duracion</th>
+                                    <th style="color:#fff;">Acciones</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($cursos as $curso)
@@ -32,12 +33,12 @@
                                             <td>
                                             <form action="{{ route('cursos.destroy',$curso->id_curso) }}" method="POST">                                        
                                         @can('editar-blog')
-                                        <a class="btn btn-info" href="{{ route('cursos.edit',$profesor->id_curso) }}">Editar</a>
+                                        <a class="btn btn-info" href="{{ route('cursos.edit',$curso->id_curso) }}">Editar</a>
                                         @endcan
 
                                         @csrf
                                         @method('DELETE')
-                                        @can('borrar-blog')
+                                        @can('borrar-curso')
                                         <button type="submit" class="btn btn-danger">Borrar</button>
                                         @endcan
                                     </form>
@@ -75,6 +76,7 @@
                 { Nombre: 'Nombre' },
                 { Descripcion: 'Descripcion' },
                 { Duracion: 'Duracion' },
+                { Acciones: 'Acciones' },
             ],
 
             language: {

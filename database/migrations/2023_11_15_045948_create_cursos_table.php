@@ -17,7 +17,7 @@ class CreateCursosTable extends Migration
             $table->bigIncrements('id_curso');
             // $table-> primary ('id');
             $table->string('nombre');
-            $table-> text ('descripcion');
+            $table-> string ('descripcion');
             $table-> integer ('duracion');
         });
     }

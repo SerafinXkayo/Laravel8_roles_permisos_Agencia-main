@@ -60,7 +60,7 @@ class ProfesorController extends Controller
         //
     }
 
- /**
+/**
  * Show the form for editing the specified resource.
  *
  * @param  int  $id
@@ -78,10 +78,24 @@ public function edit(Profesor $profesor)
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-public function update(Request $request, $id)
+public function update(Request $request, Profesor $profesor)
 {
-    
+    // Validar los campos del formulario
+    request()->validate([
+        'nombre' => 'required',
+        'apellido_paterno' => 'required',
+        'apellido_materno' => 'required',
+    ]);
+
+    // Actualizar el profesor con los datos del formulario
+    $profesor->update($request->all());
+
+    // Redireccionar a la vista de profesores
+    return redirect()->route('profesores.index');
 }
+
+
+
 
 public function destroy(Profesor $profesor)
 {

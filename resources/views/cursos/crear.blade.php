@@ -23,7 +23,7 @@
                                 </div>
                             @endif
 
-                            {!! Form::open(array('route' => 'profesores.store','method'=>'POST')) !!}
+                            {!! Form::open(array('route' => 'cursos.store','method'=>'POST')) !!}
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
@@ -33,13 +33,13 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <label for="apellido_paterno">Descripcion</label><span class="required text-danger">*</span>
+                                        <label for="descripcion">Descripcion</label><span class="required text-danger">*</span>
                                         {!! Form::text('descripcion', null, array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <label for="apellido_materno">Duracion</label><span class="required text-danger">*</span>
+                                        <label for="duracion">Duracion</label><span class="required text-danger">*</span>
                                         {!! Form::text('duracion', null, array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
