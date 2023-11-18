@@ -15,5 +15,7 @@ class Grupo extends Model
         'salon',
         'horario_inicio',
         'horario_fin',
+        'curso_id',
+        'profesor_id',
     ];
 }

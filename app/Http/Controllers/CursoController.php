@@ -11,43 +11,38 @@ class CursoController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:ver-curso|crear-curso|editar-curso|borrar-curso', ['only' => ['index']]);
-        $this->middleware('permission:crear-curso', ['only' => ['create','store']]);
-        $this->middleware('permission:editar-curso', ['only' => ['edit','update']]);
-        $this->middleware('permission:borrar-curso', ['only' => ['destroy']]);
+        $this->middleware('permission:ver-curso|screar-cursos|editar-cursos|borrar-cursos', ['only' => ['index']]);
+        $this->middleware('permission:crear-cursos', ['only' => ['create','store']]);
+        $this->middleware('permission:editar-cursos', ['only' => ['edit','update']]);
+        $this->middleware('permission:borrar-cursos', ['only' => ['destroy']]);
     }
 
     public function index()
     {
-        $cursos = Curso::paginate(10);
-        return view('cursos.index', compact('cursos'));
+        $cursos = Curso::all();
+        return view('cursos.index',compact('cursos'));
     }
 
     public function create()
     {
-        $cursos = Curso::all();
-        return view('cursos.crear', compact('cursos'));
+        return view('cursos.crear');
     }
 
     public function store(Request $request)
     {
-        // Aquí debes implementar la lógica para almacenar un nuevo curso
-    }
+        Curso::create($request->all());
+        return redirect()->route('cursos.index');    }
 
     public function show($id)
     {
         // Implementar la lógica para mostrar un curso específico
     }
 
-    public function edit($id)
+    public function edit(Curso $profesor)
     {
-        $curso = Curso::find($id);
-        // Ajustar las siguientes líneas según tus necesidades
-        $nombre = $curso->nombre;
-        $descripcion = $curso->descripcion;
-        $duracion = $curso->duracion;
+        return view('cursos.editar', compact('curso'));
 
-        return view('cursos.editar', compact('nombre', 'descripcion', 'duracion'));
+
     }
 
     public function update(Request $request, $id)
@@ -55,19 +50,10 @@ class CursoController extends Controller
         // Aquí debes implementar la lógica para actualizar un curso
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy(Curso $profesor)
     {
-        $this->validate($request, [
-            'nombre' => 'required',
-            // 'apellidos' => 'required',
-        ]);
+        $curso->delete();
 
-        $curso = Curso::find($id);
-        $curso->nombre = $request->input('nombre');
-        $curso->save();
-
-        // Aquí debes implementar la lógica para sincronizar permisos (si es necesario)
-
-        return redirect()->route('cursos.index');
+    return redirect()->route('cursos.index');
     }
 }
