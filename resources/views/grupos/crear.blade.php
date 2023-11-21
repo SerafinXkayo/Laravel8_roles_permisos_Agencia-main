@@ -63,8 +63,8 @@
                                             <option disable select value=''> Selecciona</option>
                                             @foreach(\App\Models\Profesor::get() as $profe)
                                             <option select value='{{$profe->id_profesor}}'> 
-                                                {{$profe->nombre}}{{'////'}} {{$profe->apellido_paterno}}
-                                                {{$profe->apellido_materno}}
+                                                {{$profe->nombre}} {{$profe->apellido_paterno}} 
+                                                    {{$profe->apellido_materno}}
                                             </option>
                                             @endforeach
                                         </select>
