@@ -10,6 +10,7 @@ class Grupo extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id_curso',
         'nombre',
         'cupo',
         'salon',
@@ -18,4 +19,9 @@ class Grupo extends Model
         'curso_id',
         'profesor_id',
     ];
+    protected $primaryKey = 'id_curso';
+
+    public $incrementing = true;
+
+    public $timestamps = false;
 }

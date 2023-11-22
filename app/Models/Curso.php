@@ -12,6 +12,7 @@ class Curso extends Model
     protected $table = 'cursos';//Prote
 
     protected $fillable = [
+        'id_curso',
         'nombre',
         'descripcion',
         'duracion',

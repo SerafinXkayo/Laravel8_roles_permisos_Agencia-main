@@ -16,14 +16,13 @@ class CreateGruposTable extends Migration
         Schema::create('grupos', function (Blueprint $table) {
             $table->bigIncrements('id_grupo');
             $table->string('nombre');
-            $table-> integer ('cupo');
-            $table-> string ('salon');
-            $table-> date ('hora_inicio');
-            $table-> date ('hora_fin');
+            $table->integer('cupo');
+            $table->string('salon');
+            $table->time('horario_inicio'); // Cambiado a tipo time
+            $table->time('horario_fin');    // Cambiado a tipo time
 
             $table->foreignId('profesor_id')->constrained('profesores', 'id_profesor');
             $table->foreignId('curso_id')->constrained('cursos', 'id_curso');
-
         });
     }
 

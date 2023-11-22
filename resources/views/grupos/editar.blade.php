@@ -1,9 +1,9 @@
 @extends('layouts.app')
-dd($profesor);
+
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Editar Profesor</h3>
+            <h3 class="page__heading">Editar Grupo</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -23,29 +23,47 @@ dd($profesor);
                                 </div>
                             @endif
 
-                            {!! Form::open(['method' => 'PATCH', 'route' => ['profesores.update', $profesor->id_profesor]]) !!}
+                            {!! Form::model($grupo, ['method' => 'PATCH','route' => ['grupos.update', $grupo->id_grupo]]) !!}
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="nombre">Nombre</label><span class="required text-danger">*</span>
-                                        <input type="text" name="nombre" class="form-control" value="{{ $profesor->nombre }}">
+                                        <input type="text" name="nombre" class="form-control" value="{{ $curso->nombre }}">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <label for="apellido_paterno">Apellido Paterno</label><span class="required text-danger">*</span>
-                                        <input type="text" name="apellido_paterno" class="form-control" value="{{ $profesor->apellido_paterno }}">
+                                        <label for="descripcion">Descripcion</label><span class="required text-danger">*</span>
+                                        <input type="text" name="descripcion" class="form-control" value="{{ $curso->descripcion }}">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <label for="apellido_materno">Apellido Materno</label><span class="required text-danger">*</span>
-                                        <input type="text" name="apellido_materno" class="form-control" value="{{ $profesor->apellido_materno }}">
+                                        <label for="duracion">Duracion</label><span class="required text-danger">*</span>
+                                        <input type="text" name="duracion" class="form-control" value="{{ $curso->duracion }}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <label for="duracion">Duracion</label><span class="required text-danger">*</span>
+                                        <input type="text" name="duracion" class="form-control" value="{{ $curso->duracion }}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <label for="duracion">Duracion</label><span class="required text-danger">*</span>
+                                        <input type="text" name="duracion" class="form-control" value="{{ $curso->duracion }}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <label for="duracion">Duracion</label><span class="required text-danger">*</span>
+                                        <input type="text" name="duracion" class="form-control" value="{{ $curso->duracion }}">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <button type="submit" class="btn btn-primary">Guardar</button>
-                                    <a href="{{ route('profesores.index') }}" class="btn btn-warning">Cancelar</a>
+                                    <a href="{{ route('cursos.index') }}" class="btn btn-warning">Cancelar</a>
                                 </div>
                             </div>
                             {!! Form::close() !!}

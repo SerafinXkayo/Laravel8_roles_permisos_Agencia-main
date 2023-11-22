@@ -10,7 +10,6 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">                            
-                   
                         @if ($errors->any())                                                
                             <div class="alert alert-dark alert-dismissible fade show" role="alert">
                             <strong>¡Revise los campos!</strong>                        
@@ -30,8 +29,8 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                   <label for="titulo">Título</label>
-                                   <input type="text" name="titulo" class="form-control" value="{{ $blog->titulo }}">
+                                <label for="titulo">Título</label>
+                                <input type="text" name="titulo" class="form-control" value="{{ $blog->titulo }}">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">

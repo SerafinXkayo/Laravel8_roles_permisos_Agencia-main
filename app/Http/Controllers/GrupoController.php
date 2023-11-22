@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Curso; // Agregar la importación de la clase Curso
-use App\Models\Profesor; // Agregar la importación de la clase Profesor
+use App\Models\Profesore; // Agregar la importación de la clase Profesor
 use App\Models\Grupo; // Agregar la importación de la clase Profesor
 use Illuminate\Support\Facades\DB;
 
@@ -17,54 +17,35 @@ class GrupoController extends Controller
         $this->middleware('permission:editar-grupos', ['only' => ['edit', 'update']]);
         $this->middleware('permission:borrar-grupos', ['only' => ['destroy']]);
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $grupos = Grupo::paginate(10);
+        $grupos = Grupo::all();
 
         return view('grupos.index', compact('grupos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $profesores = Profesor::all(); // Ajusta esto según tu lógica de obtención de profesores
+        $profesores = Profesore::all(); // Ajusta esto según tu lógica de obtención de profesores
         $cursos = Curso::all(); // Ajusta esto según tu lógica de obtención de cursos
     
         return view('grupos.crear', compact('profesores', 'cursos'));
     }
-    
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function store(Request $request)
+    {
+        Grupo::create($request->all());
+        return redirect()->route('grupos.index');  
+    }
+
     public function edit($id)
     {
-        $profesor = Profesor::find($id);
+        $profesor = Profesore::find($id);
         $curso = Curso::find($id);
         $grupo = Grupo::get();
         $grupoNuevo = DB::table("grupo")->where("grupo.id_profesor",$id)
@@ -74,24 +55,12 @@ class GrupoController extends Controller
         return view('grupo.editar',compact('nombre','cupo','salon','hora_inicio', 'hora_fin'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         DB::table("grupos")->where('id_grupo',$id)->delete();
