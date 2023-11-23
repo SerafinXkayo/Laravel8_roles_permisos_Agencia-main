@@ -11,7 +11,8 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <a class="btn btn-warning" href="{{ route('grupos.create') }}" title="Crear nuevo grupo">+ Nuevo grupo</a>
+                            <a class="btn btn-warning" href="{{ route('grupos.create') }}" title="Crear nuevo grupo">+ Nuevo
+                                grupo</a>
                             <div>
                                 <br>
                             </div>
@@ -25,22 +26,34 @@
                                     <th style="color:#fff;">Horario Fin</th>
                                     <th style="color:#fff;">Profesor</th>
                                     <th style="color:#fff;">Curso</th>
+                                    <th style="color:#fff;">Acciones</th>
+
                                 </thead>
                                 <tbody>
                                     @foreach ($grupos as $grupo)
+                                        @php
+                                            $profesor = App\Models\Profesor::find($grupo->profesor_id);
+                                        @endphp
+                                        @php
+                                            $curso = App\Models\Curso::find($grupo->curso_id);
+                                        @endphp
+
                                         <tr>
                                             <td style="display: none;">{{ $grupo->id_grupo }}</td>
                                             <td>{{ $grupo->nombre }}</td>
                                             <td>{{ $grupo->cupo }}</td>
                                             <td>{{ $grupo->salon }}</td>
-                                            <td>{{ $grupo->horario_inicio }}</td>
-                                            <td>{{ $grupo->horario_fin }}</td>
-                                            <td>{{ $grupo->profesor->nombreCompleto() }}</td>
-                                            <td>{{ $grupo->curso->nombre }}</td>
+                                            <td>{{ $grupo->hora_inicio }}</td>
+                                            <td>{{ $grupo->hora_fin }}</td>
+                                            <td>{{ $profesor->nombre }} {{ $profesor->apellido_paterno }}
+                                                {{ $profesor->apellido_materno }}</td>
+                                            <td>{{ $curso->nombre }}</td>
                                             <td>
-                                                <form action="{{ route('grupos.destroy',$grupo->id_grupo) }}" method="POST">                                        
-                                                    @can('editar-grupo')
-                                                        <a class="btn btn-info" href="{{ route('grupos.edit',$grupo->id_grupo) }}">Editar</a>
+                                                <form action="{{ route('grupos.destroy', $grupo->id_grupo) }}"
+                                                    method="POST">
+                                                    @can('editar-grupos')
+                                                        <a class="btn btn-info"
+                                                            href="{{ route('grupos.edit', $grupo->id_grupo) }}">Editar</a>
                                                     @endcan
 
                                                     @csrf
@@ -76,15 +89,33 @@
                 [2, 5, 10]
             ],
 
-            columns: [
-                { Id: 'Id' },
-                { Nombre: 'Nombre' },
-                { Cupo: 'Cupo' },
-                { Salon: 'Salon' },
-                { HorarioInicio: 'Horario Inicio' },
-                { HorarioFin: 'Horario Fin' },
-                { Profesor: 'Profesor' },
-                { Curso: 'Curso' },
+            columns: [{
+                    Id: 'id_grupo'
+                },
+                {
+                    Nombre: 'nombre'
+                },
+                {
+                    Cupo: 'cupo'
+                },
+                {
+                    Salon: 'salon'
+                },
+                {
+                    Hora_Inicio: 'horario_inicio'
+                },
+                {
+                    Hora_Fin: 'horario_fin'
+                },
+                {
+                    Profesor: 'profesor'
+                },
+                {
+                    Curso: 'curso'
+                },
+                {
+                    Acciones: 'acciones'
+                },
             ],
 
             language: {

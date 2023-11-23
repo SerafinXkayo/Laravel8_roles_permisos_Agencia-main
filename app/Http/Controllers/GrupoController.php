@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Curso; // Agregar la importación de la clase Curso
-use App\Models\Profesore; // Agregar la importación de la clase Profesor
+use App\Models\Profesor; // Agregar la importación de la clase Profesor
 use App\Models\Grupo; // Agregar la importación de la clase Profesor
-use Illuminate\Support\Facades\DB;
 
 class GrupoController extends Controller
 {
@@ -26,10 +25,8 @@ class GrupoController extends Controller
 
     public function create()
     {
-        $profesores = Profesore::all(); // Ajusta esto según tu lógica de obtención de profesores
-        $cursos = Curso::all(); // Ajusta esto según tu lógica de obtención de cursos
-    
-        return view('grupos.crear', compact('profesores', 'cursos'));
+        
+        return view('grupos.crear');
     }
 
     public function show($id)
@@ -39,31 +36,44 @@ class GrupoController extends Controller
 
     public function store(Request $request)
     {
+        request()->validate([
+            'nombre' => 'required',
+            'cupo' => 'required',
+            'salon' => 'required',
+            'hora_inicio' => 'required',
+            'hora_fin' => 'required',
+        
+        ]);
         Grupo::create($request->all());
         return redirect()->route('grupos.index');  
     }
 
-    public function edit($id)
+    public function edit(Grupo $grupo)
     {
-        $profesor = Profesore::find($id);
-        $curso = Curso::find($id);
-        $grupo = Grupo::get();
-        $grupoNuevo = DB::table("grupo")->where("grupo.id_profesor",$id)
-            ->pluck('grupo.id_profesor','grupo.id_profesor')
-            ->all();
+        
+        return view('grupos.editar',compact('grupo'));
+    }
+
+
+    public function update(Request $request, Grupo $grupo)
+    {
+        request()->validate([
+            'nombre' => 'required',
+            'cupo' => 'required',
+            'salon' => 'required',
+            'hora_inicio' => 'required',
+            'hora_fin' => 'required',
+        
+        ]);
+        $grupo->update($request->all());
+        return redirect()->route('grupos.index');  
     
-        return view('grupo.editar',compact('nombre','cupo','salon','hora_inicio', 'hora_fin'));
     }
 
-
-    public function update(Request $request, $id)
+    public function destroy(Grupo $grupo)
     {
-        //
-    }
-
-    public function destroy($id)
-    {
-        DB::table("grupos")->where('id_grupo',$id)->delete();
+        $grupo->delete();
+    
         return redirect()->route('grupos.index');
     }
 }
