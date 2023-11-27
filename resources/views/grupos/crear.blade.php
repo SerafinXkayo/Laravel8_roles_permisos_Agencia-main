@@ -45,21 +45,21 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <label for="horario_inicio">Horario Inicio</label><span class="required text-danger">*</span>
-                                        {!! Form::text('horario_inicio', null, array('class' => 'form-control')) !!}
+                                        <label for="hora_inicio">Horario Inicio</label><span class="required text-danger">*</span>
+                                        {!! Form::text('hora_inicio', null, array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <label for="horario_fin">Horario Fin</label><span class="required text-danger">*</span>
-                                        {!! Form::text('horario_fin', null, array('class' => 'form-control')) !!}
+                                        <label for="hora_fin">Horario Fin</label><span class="required text-danger">*</span>
+                                        {!! Form::text('hora_fin', null, array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
                                 
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <label for='id_profesor'>Profesor,</label>
-                                        <select name='id_profesor' class='form-control custom-select'>
+                                        <label for='profesor_id'>Profesor,</label>
+                                        <select name='profesor_id' class='form-control custom-select'>
                                             <option disable select value=''> Selecciona</option>
                                             @foreach(\App\Models\Profesor::get() as $profe)
                                             <option select value='{{$profe->id_profesor}}'> 
@@ -72,8 +72,8 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <label for='id_curso'>Curso,</label>
-                                        <select name='id_curso' class='form-control custom-select'>
+                                        <label for='curso_id'>Curso,</label>
+                                        <select name='curso_id' class='form-control custom-select'>
                                             <option disable select value=''> Selecciona</option>
                                             @foreach(\App\Models\Curso::get() as $curs)
                                             <option select value='{{$curs->id_curso}}'> {{$curs->nombre}}</option>

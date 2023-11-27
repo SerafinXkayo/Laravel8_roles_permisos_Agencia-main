@@ -10,18 +10,19 @@ class Grupo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_curso',
         'nombre',
         'cupo',
         'salon',
-        'horario_inicio',
-        'horario_fin',
+        'hora_inicio',
+        'hora_fin',
         'curso_id',
         'profesor_id',
     ];
-    protected $primaryKey = 'id_curso';
+
+    protected $primaryKey = 'id_grupo';
 
     public $incrementing = true;
 
     public $timestamps = false;
+    //aaaaaaaaaaaaaaaaaaa
 }

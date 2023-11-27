@@ -18,8 +18,8 @@ class CreateGruposTable extends Migration
             $table->string('nombre');
             $table->integer('cupo');
             $table->string('salon');
-            $table->time('horario_inicio'); // Cambiado a tipo time
-            $table->time('horario_fin');    // Cambiado a tipo time
+            $table->time('hora_inicio'); // Cambiado a tipo time
+            $table->time('hora_fin');    // Cambiado a tipo time
 
             $table->foreignId('profesor_id')->constrained('profesores', 'id_profesor');
             $table->foreignId('curso_id')->constrained('cursos', 'id_curso');
