@@ -27,11 +27,35 @@ class SeederTablaPermisos extends Seeder
             'ver-blog',
             'crear-blog',
             'editar-blog',
-            'borrar-blog'
+            'borrar-blog',
+
+            //operaciones sobre tabla grupos
+            'ver-grupos',
+            'crear-grupos',
+            'editar-grupos',
+            'borrar-grupos',
+
+            //operaciones sobre tabla usuarios
+            'ver-usuarios',
+            'crear-usuarios',
+            'editar-usuarios',
+            'borrar-usuarios',
+            
+            //operaciones sobre tabla cursos
+            'ver-cursos',
+            'crear-cursos',
+            'editar-cursos',
+            'borrar-cursos',
+
+            //operaciones sobre tabla profesores
+            'ver-profesores',
+            'crear-profesores',
+            'editar-profesores',
+            'borrar-profesores',
         ];
 
-        foreach($permisos as $permiso) {
-            Permission::create(['name'=>$permiso]);
+        foreach ($permisos as $permiso) {
+            Permission::create(['name' => $permiso]);
         }
     }
 }
