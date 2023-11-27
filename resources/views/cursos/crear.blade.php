@@ -28,19 +28,19 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="nombre">Nombre</label><span class="required text-danger">*</span>
-                                        {!! Form::text('nombre', null, array('class' => 'form-control')) !!}
+                                        {!! Form::text('nombre', null, array('class' => 'form-control', 'placeholder' => 'Ingrese el nombre del curso')) !!}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="descripcion">Descripcion</label><span class="required text-danger">*</span>
-                                        {!! Form::text('descripcion', null, array('class' => 'form-control')) !!}
+                                        {!! Form::text('descripcion', null, array('class' => 'form-control', 'placeholder' => 'Ingrese la descripción del curso')) !!}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="duracion">Duracion</label><span class="required text-danger">*</span>
-                                        {!! Form::text('duracion', null, array('class' => 'form-control')) !!}
+                                        {!! Form::text('duracion', null, array('class' => 'form-control', 'placeholder' => 'Ingrese la duración del curso')) !!}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">

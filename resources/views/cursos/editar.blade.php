@@ -28,19 +28,19 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="nombre">Nombre</label><span class="required text-danger">*</span>
-                                        <input type="text" name="nombre" class="form-control" value="{{ $curso->nombre }}">
+                                        <input type="text" name="nombre" class="form-control" value="{{ $curso->nombre }}" placeholder="Ingrese el nombre del curso">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <label for="descripcion">Descripcion</label><span class="required text-danger">*</span>
-                                        <input type="text" name="descripcion" class="form-control" value="{{ $curso->descripcion }}">
+                                        <label for="descripcion">Descripción</label><span class="required text-danger">*</span>
+                                        <input type="text" name="descripcion" class="form-control" value="{{ $curso->descripcion }}" placeholder="Ingrese la descripción del curso">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <label for="duracion">Duracion</label><span class="required text-danger">*</span>
-                                        <input type="text" name="duracion" class="form-control" value="{{ $curso->duracion }}">
+                                        <label for="duracion">Duración</label><span class="required text-danger">*</span>
+                                        <input type="text" name="duracion" class="form-control" value="{{ $curso->duracion }}" placeholder="Ingrese la duración del curso">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">

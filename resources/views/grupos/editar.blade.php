@@ -28,41 +28,41 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="nombre">Nombre</label><span class="required text-danger">*</span>
-                                        <input type="text" name="nombre" class="form-control" value="{{ $grupo->nombre }}">
+                                        <input type="text" name="nombre" class="form-control" value="{{ $grupo->nombre }}" placeholder="Ingrese el nombre del grupo">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="cupo">Cupo</label><span class="required text-danger">*</span>
-                                        <input type="text" name="cupo" class="form-control" value="{{ $grupo->cupo }}">
+                                        <input type="number" name="cupo" class="form-control" value="{{ $grupo->cupo }}" placeholder="Ingrese el cupo del grupo">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="salon">Salon</label><span class="required text-danger">*</span>
-                                        <input type="text" name="salon" class="form-control" value="{{ $grupo->salon }}">
+                                        <input type="text" name="salon" class="form-control" value="{{ $grupo->salon }}" placeholder="Ingrese el salón del grupo">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="hora_inicio">Hora de inicio</label><span class="required text-danger">*</span>
-                                        <input type="text" name="hora_inicio" class="form-control" value="{{ $grupo->hora_inicio }}">
+                                        <input type="text" name="hora_inicio" class="form-control" value="{{ $grupo->hora_inicio }}" placeholder="Ingrese la hora de inicio por ejemplo: 08:00:00">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="hora_fin">Hora de fin</label><span class="required text-danger">*</span>
-                                        <input type="text" name="hora_fin" class="form-control" value="{{ $grupo->hora_fin }}">
+                                        <input type="text" name="hora_fin" class="form-control" value="{{ $grupo->hora_fin }}" placeholder="Ingrese la hora de fin por ejemplo: 09:00:00">
                                     </div>
                                 </div>
                                 
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for='profesor_id'>Profesor,</label>
-                                        <select name='profesor_id' class='form-control custom-select'>
-                                            <option disable select value=''> Selecciona</option>
+                                        <select name='profesor_id' class='form-control custom-select' placeholder='Seleccione un profesor'>
+                                            <option disabled value=''> Selecciona</option>
                                             @foreach(\App\Models\Profesor::get() as $profe)
-                                            <option select value='{{$profe->id_profesor}}'> 
+                                            <option value='{{$profe->id_profesor}}' {{ $profe->id_profesor == $grupo->profesor_id ? 'selected' : '' }}> 
                                                 {{$profe->nombre}} {{$profe->apellido_paterno}} 
                                                     {{$profe->apellido_materno}}
                                             </option>
@@ -74,10 +74,10 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for='curso_id'>Curso,</label>
-                                        <select name='curso_id' class='form-control custom-select'>
-                                            <option disable select value=''> Selecciona</option>
+                                        <select name='curso_id' class='form-control custom-select' placeholder='Seleccione un curso'>
+                                            <option disabled value=''> Selecciona</option>
                                             @foreach(\App\Models\Curso::get() as $curs)
-                                            <option select value='{{$curs->id_curso}}'> {{$curs->nombre}}</option>
+                                            <option value='{{$curs->id_curso}}' {{ $curs->id_curso == $grupo->curso_id ? 'selected' : '' }}> {{$curs->nombre}}</option>
                                             @endforeach
                                         </select>
                                     </div>

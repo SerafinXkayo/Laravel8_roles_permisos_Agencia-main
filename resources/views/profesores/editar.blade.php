@@ -1,5 +1,5 @@
 @extends('layouts.app')
-dd($profesor);
+
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -28,19 +28,19 @@ dd($profesor);
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="nombre">Nombre</label><span class="required text-danger">*</span>
-                                        <input type="text" name="nombre" class="form-control" value="{{ $profesor->nombre }}">
+                                        <input type="text" name="nombre" class="form-control" value="{{ $profesor->nombre }}" placeholder="Ingrese el nombre">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="apellido_paterno">Apellido Paterno</label><span class="required text-danger">*</span>
-                                        <input type="text" name="apellido_paterno" class="form-control" value="{{ $profesor->apellido_paterno }}">
+                                        <input type="text" name="apellido_paterno" class="form-control" value="{{ $profesor->apellido_paterno }}" placeholder="Ingrese el apellido paterno">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="apellido_materno">Apellido Materno</label><span class="required text-danger">*</span>
-                                        <input type="text" name="apellido_materno" class="form-control" value="{{ $profesor->apellido_materno }}">
+                                        <input type="text" name="apellido_materno" class="form-control" value="{{ $profesor->apellido_materno }}" placeholder="Ingrese el apellido materno">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">

@@ -28,19 +28,19 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="nombre">Nombre</label><span class="required text-danger">*</span>
-                                        {!! Form::text('nombre', null, array('class' => 'form-control')) !!}
+                                        {!! Form::text('nombre', null, array('class' => 'form-control', 'placeholder' => 'Ingrese el o los nombres')) !!}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="apellido_paterno">Apellido Paterno</label><span class="required text-danger">*</span>
-                                        {!! Form::text('apellido_paterno', null, array('class' => 'form-control')) !!}
+                                        {!! Form::text('apellido_paterno', null, array('class' => 'form-control', 'placeholder' => 'Ingrese el apellido paterno')) !!}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="apellido_materno">Apellido Materno</label><span class="required text-danger">*</span>
-                                        {!! Form::text('apellido_materno', null, array('class' => 'form-control')) !!}
+                                        {!! Form::text('apellido_materno', null, array('class' => 'form-control', 'placeholder' => 'Ingrese el apellido materno')) !!}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
