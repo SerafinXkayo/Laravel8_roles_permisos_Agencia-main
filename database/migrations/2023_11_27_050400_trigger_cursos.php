@@ -50,3 +50,4 @@ class TriggerCursos extends Migration
         DB::unprepared('DROP TRIGGER IF EXISTS trigger_delete_cursos');
     }
 }
+//Cambios Limni
