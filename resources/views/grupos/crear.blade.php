@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+
+<head>
+    <!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+</head>
     <section class="section">
         <div class="section-header">
             <h3 class="page__heading">Alta de Grupos</h3>
@@ -46,15 +55,17 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="hora_inicio">Horario Inicio</label><span class="required text-danger">*</span>
-                                        {!! Form::text('hora_inicio', null, array('class' => 'form-control', 'placeholder' => 'Ingrese la hora de inicio por ejemplo: 08:00:00')) !!}
+                                        {!! Form::text('hora_inicio', null, array('class' => 'form-control', 'data-input', 'placeholder' => 'Seleccione la hora de inicio')) !!}
                                     </div>
                                 </div>
+                                
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for="hora_fin">Horario Fin</label><span class="required text-danger">*</span>
-                                        {!! Form::text('hora_fin', null, array('class' => 'form-control', 'placeholder' => 'Ingrese la hora de fin por ejemplo: 09:00:00')) !!}
+                                        {!! Form::text('hora_fin', null, array('class' => 'form-control', 'data-input', 'placeholder' => 'Seleccione la hora de fin')) !!}
                                     </div>
                                 </div>
+                                
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label for='profesor_id'>Profesor,</label>
@@ -92,4 +103,15 @@
             </div>
         </div>
     </section>
+    <script>
+        flatpickr('[data-input]', {
+            enableTime: true,
+            enableSeconds: true,
+            noCalendar: true,
+            dateFormat: "H:i:S",
+            time_24hr: true,
+        });
+    </script>
+    
+    
 @endsection

@@ -25,8 +25,12 @@ class GrupoController extends Controller
 
     public function create()
     {
-        
         return view('grupos.crear');
+    }
+
+    public function edit(Grupo $grupo)
+    {
+        return view('grupos.editar', compact('grupo'));
     }
 
     public function show($id)
@@ -36,44 +40,63 @@ class GrupoController extends Controller
 
     public function store(Request $request)
     {
-        request()->validate([
+        $request->validate([
             'nombre' => 'required',
-            'cupo' => 'required',
+            'cupo' => 'required|numeric|min:1|max:40',
             'salon' => 'required',
-            'hora_inicio' => 'required',
-            'hora_fin' => 'required',
-        
+            'hora_inicio' => 'required|date_format:H:i:s',
+            'hora_fin' => 'required|date_format:H:i:s|after:hora_inicio',
+            'id_profesor' => 'required|exists:profesores,id_profesor',
+            'id_curso' => 'required|exists:cursos,id_curso',
+        ], [
+            'cupo.numeric' => 'El campo cupo debe ser un número.',
+            'cupo.min' => 'El campo cupo debe ser como mínimo 1.',
+            'cupo.max' => 'El campo cupo debe ser como máximo 40.',
+            'hora_fin.after' => 'La hora de fin debe ser posterior a la hora de inicio.',
+            'id_profesor.required' => 'Debe seleccionar un profesor.',
+            'id_curso.required' => 'Debe seleccionar un curso.',
+            'id_profesor.exists' => 'El profesor seleccionado no es válido.',
+            'id_curso.exists' => 'El curso seleccionado no es válido.',
         ]);
+    
         Grupo::create($request->all());
-        return redirect()->route('grupos.index');  
+    
+        return redirect()->route('grupos.index');
     }
-
-    public function edit(Grupo $grupo)
-    {
-        
-        return view('grupos.editar',compact('grupo'));
-    }
-
-
+    
     public function update(Request $request, Grupo $grupo)
     {
-        request()->validate([
+        $request->validate([
             'nombre' => 'required',
-            'cupo' => 'required',
+            'cupo' => 'required|numeric|min:1|max:40',
             'salon' => 'required',
-            'hora_inicio' => 'required',
-            'hora_fin' => 'required',
-        
+            'hora_inicio' => 'required|date_format:H:i:s',
+            'hora_fin' => 'required|date_format:H:i:s|after:hora_inicio',
+            'id_profesor' => 'required|exists:profesores,id_profesor',
+            'id_curso' => 'required|exists:cursos,id_curso',
+        ], [
+            'cupo.numeric' => 'El campo cupo debe ser un número.',
+            'cupo.min' => 'El campo cupo debe ser como mínimo 1.',
+            'cupo.max' => 'El campo cupo debe ser como máximo 40.',
+            'hora_fin.after' => 'La hora de fin debe ser posterior a la hora de inicio.',
+            'id_profesor.required' => 'Debe seleccionar un profesor.',
+            'id_curso.required' => 'Debe seleccionar un curso.',
+            'id_profesor.exists' => 'El profesor seleccionado no es válido.',
+            'id_curso.exists' => 'El curso seleccionado no es válido.',
         ]);
-        $grupo->update($request->all());
-        return redirect()->route('grupos.index');  
     
+        $grupo->update($request->all());
+    
+        return redirect()->route('grupos.index');
     }
+    
+    
+    
 
     public function destroy(Grupo $grupo)
     {
         $grupo->delete();
-    
+
         return redirect()->route('grupos.index');
     }
 }
