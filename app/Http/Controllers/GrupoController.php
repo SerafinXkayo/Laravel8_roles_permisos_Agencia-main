@@ -61,27 +61,39 @@ class GrupoController extends Controller
         'hora_inicio' => 'required|date_format:H:i:s',
         'hora_fin' => 'required|date_format:H:i:s|after:hora_inicio',
 
+        'curso_id' => 'required|exists:cursos,id_curso',
         'profesor_id' => [
             'required',
             'exists:profesores,id_profesor',
             function ($attribute, $value, $fail) use ($request) {
                 $profesor = Profesor::find($request->profesor_id);
-
+        
                 if ($profesor) {
                     $conflictingGroups = $profesor->grupos()
                         ->where(function ($query) use ($request) {
-                            $query->whereBetween('hora_inicio', [$request->hora_inicio, $request->hora_fin])
-                                ->orWhereBetween('hora_fin', [$request->hora_inicio, $request->hora_fin]);
+                            $query->where(function ($subquery) use ($request) {
+                                $subquery->where('hora_inicio', '<', $request->hora_fin)
+                                    ->where('hora_fin', '>', $request->hora_inicio);
+                            })
+                            ->orWhere(function ($subquery) use ($request) {
+                                // Excluimos el caso de la hora de inicio igual a la hora de fin
+                                $subquery->where('hora_inicio', '=', $request->hora_fin)
+                                    ->where('hora_fin', '=', $request->hora_inicio);
+                            });
                         })
                         ->get();
-
+        
+                    // dd($request->all(), $profesor, $conflictingGroups); // Agrega esta línea para depurar
+        
                     if ($conflictingGroups->isNotEmpty()) {
                         $fail('El profesor ya tiene una clase programada en ese horario.');
                     }
                 }
             },
         ],
-                'curso_id' => 'required|exists:cursos,id_curso',
+        
+        
+               // 'curso_id' => 'required|exists:cursos,id_curso',
        
         ], [
         'cupo.numeric' => 'El campo cupo debe ser un número.',
@@ -92,7 +104,6 @@ class GrupoController extends Controller
         'curso_id.required' => 'Debe seleccionar un curso.',
         'profesor_id.exists' => 'El profesor seleccionado no es válido.',
         'curso_id.exists' => 'El curso seleccionado no es válido.',
-        'hora_no_conflictiva.unique' => 'El profesor ya tiene una clase programada en ese horario.',
     ]);
 
     Grupo::create($request->all());
@@ -135,7 +146,7 @@ class GrupoController extends Controller
                     }
                 },
             ],
-            'id_curso' => 'required|exists:cursos,id_curso',
+            'curso_id' => 'required|exists:cursos,id_curso',
         ], [
             'cupo.numeric' => 'El campo cupo debe ser un número.',
             'cupo.min' => 'El campo cupo debe ser como mínimo 1.',
