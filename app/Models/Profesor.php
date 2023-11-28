@@ -12,7 +12,7 @@ class Profesor extends Model
     protected $table = 'profesores';//Protegido
 
     protected $fillable = [
-        'id_profesor',
+        
         'nombre',
         'apellido_paterno',
         'apellido_materno',
@@ -23,6 +23,12 @@ class Profesor extends Model
     public $incrementing = true;
 
     public $timestamps = false;
+
+
+public function grupos()
+{
+    return $this->hasMany(Grupo::class, 'profesor_id');
+}
     
 }
 

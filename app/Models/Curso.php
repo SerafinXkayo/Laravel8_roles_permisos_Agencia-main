@@ -24,4 +24,8 @@ class Curso extends Model
 
     public $timestamps = false;
     
+    public function grupos()
+{
+    return $this->hasMany(Grupo::class, 'curso_id');
+}
 }

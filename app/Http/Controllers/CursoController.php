@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Curso; // Agregar la importación de la clase Curso
-//use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class CursoController extends Controller
 {
@@ -28,9 +28,15 @@ class CursoController extends Controller
     }
 
     public function store(Request $request)
-    {
+    { //nombre, descripción, duracion
+        $request->validate([
+            'nombre' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
+            'descripcion' => 'required',
+            'duracion' => 'required|numeric',
+        ]);
+    
         Curso::create($request->all());
-        return redirect()->route('cursos.index');  
+        return redirect()->route('cursos.index');
     }
 
     public function show($id)
@@ -45,20 +51,26 @@ class CursoController extends Controller
 
     public function update(Request $request, Curso $curso)
     {
-        request()->validate([
-            'nombre' => 'required',
+        $request->validate([
+            'nombre' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
             'descripcion' => 'required',
-            'duracion' => 'required',
+            'duracion' => 'required|numeric',
         ]);
     
         $curso->update($request->all());
     
         return redirect()->route('cursos.index');
     }
-    public function destroy(Curso $curso)
+    public function destroy($id)
     {
-        $curso->delete();
+        $curso=Curso::find($id);
+        if($curso->grupos->isNotEmpty()){
+            return redirect()->route('cursos.index')
+            ->with('error','No puedes eliminar un curso, pues este ya tiene un grupo creado');
 
+        }
+
+        $curso->delete();
     return redirect()->route('cursos.index');
     }
 }

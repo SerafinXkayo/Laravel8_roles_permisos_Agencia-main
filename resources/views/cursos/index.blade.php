@@ -11,6 +11,14 @@
                     <div class="card">
                         <div class="card-body">
 
+                        {{-- Mensajes de error --}}
+                            @if(session('error'))
+                                <div id="error-message" class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+
+
                             <a class="btn btn-warning" href="{{ route('cursos.create') }}" title="Crear nuevo curso">+ Nuevo curso</a>
                             <div>
                                 <br>
@@ -82,6 +90,13 @@
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
             }
+        });
+
+         // Ocultar el mensaje de error después de 5 segundos (5000 milisegundos)
+         $(document).ready(function(){
+            setTimeout(function(){
+                $('#error-message').fadeOut('slow');
+            }, 5000); // 5000 milisegundos = 5 segundos
         });
     </script>
 @endsection

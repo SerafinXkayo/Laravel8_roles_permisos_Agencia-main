@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Profesor; // Cambiado el namespace
 //use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+
 
 class ProfesorController extends Controller
 {
@@ -29,6 +31,12 @@ class ProfesorController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre' => 'required|regex:/^[a-zA-Z\s]+$/',
+            'apellido_paterno' => 'required|alpha',
+            'apellido_materno' => 'required|alpha',
+        ]);
+    
         Profesor::create($request->all());
         return redirect()->route('profesores.index');
     }
@@ -49,9 +57,9 @@ class ProfesorController extends Controller
         $profesor = Profesor::find($id);
         // Validar los campos del formulario
         $request->validate([
-            'nombre' => 'required',
-            'apellido_paterno' => 'required',
-            'apellido_materno' => 'required',
+            'nombre' => 'required|regex:/^[a-zA-Z\s]+$/',
+            'apellido_paterno' => 'required|alpha',
+            'apellido_materno' => 'required|alpha',
         ]);
         // Actualizar el profesor con los datos del formulario
         $profesor->update($request->all());
@@ -63,8 +71,14 @@ class ProfesorController extends Controller
     public function destroy( $id)
     {
         $profesor = Profesor::find($id);
-        $profesor->delete();
 
+        if ($profesor->grupos->isNotEmpty()) {
+            return redirect()->route('profesores.index')
+            ->with('error', 'No puedes eliminar al profesor porque tiene grupos asignados.');
+        }
+    
+        $profesor->delete();
+    
         return redirect()->route('profesores.index');
     }
 }
