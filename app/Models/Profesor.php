@@ -29,6 +29,8 @@ public function grupos()
 {
     return $this->hasMany(Grupo::class, 'profesor_id');
 }
+
+
     
 }
 
