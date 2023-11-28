@@ -45,7 +45,19 @@ class GrupoController extends Controller
     $request->validate([
         'nombre' => 'required',
         'cupo' => 'required|numeric|min:1|max:40',
-        'salon' => 'required',
+        'salon' => 'required','salon' => [
+            'required',
+            function ($attribute, $value, $fail) use ($request) {
+                $conflictingSalon = Grupo::where('salon', $value)
+                    ->where('hora_inicio', '<', $request->hora_fin)
+                    ->where('hora_fin', '>', $request->hora_inicio)
+                    ->exists();
+
+                if ($conflictingSalon) {
+                    $fail('El salón está ocupado en ese horario.');
+                }
+            },
+        ],
         'hora_inicio' => 'required|date_format:H:i:s',
         'hora_fin' => 'required|date_format:H:i:s|after:hora_inicio',
 
@@ -94,7 +106,19 @@ class GrupoController extends Controller
         $request->validate([
             'nombre' => 'required',
             'cupo' => 'required|numeric|min:1|max:40',
-            'salon' => 'required',
+            'salon' => [
+                'required',
+                function ($attribute, $value, $fail) use ($request) {
+                    $conflictingSalon = Grupo::where('salon', $value)
+                        ->where('hora_inicio', '<', $request->hora_fin)
+                        ->where('hora_fin', '>', $request->hora_inicio)
+                        ->exists();
+    
+                    if ($conflictingSalon) {
+                        $fail('El salón está ocupado en ese horario.');
+                    }
+                },
+            ],
             'hora_inicio' => 'required|date_format:H:i:s',
             'hora_fin' => 'required|date_format:H:i:s|after:hora_inicio',
             'profesor_id' => ['required', 'exists:profesores,id_profesor',
