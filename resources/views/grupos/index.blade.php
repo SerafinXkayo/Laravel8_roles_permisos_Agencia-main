@@ -11,8 +11,9 @@
                     <div class="card">
                         <div class="card-body">
 
+                            @can('crear-grupos')
                             <a class="btn btn-warning" href="{{ route('grupos.create') }}" title="Crear nuevo grupo">+ Nuevo
-                                grupo</a>
+                                grupo</a>@endcan
                             <div>
                                 <br>
                             </div>
