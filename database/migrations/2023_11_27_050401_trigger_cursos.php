@@ -17,7 +17,7 @@ class TriggerCursos extends Migration
             CREATE TRIGGER trigger_insert_cursos
             AFTER INSERT ON cursos
             FOR EACH ROW
-            INSERT INTO tablacambios_log (nombre_tabla, cambio, usuario_modificador, dato_modificado, campo_modificado, fecha_modificacion)
+            INSERT INTO tablacambios_log (nombre_tabla, cambio, usuario_modificador, fecha_modificacion)
             VALUES ("Profesores", "Insert", USER(), NOW())
         ');
 
@@ -25,7 +25,7 @@ class TriggerCursos extends Migration
             CREATE TRIGGER trigger_update_cursos
             AFTER UPDATE ON cursos
             FOR EACH ROW
-            INSERT INTO tablacambios_log (nombre_tabla, cambio, usuario_modificador, dato_modificado, campo_modificado, fecha_modificacion)
+            INSERT INTO tablacambios_log (nombre_tabla, cambio, usuario_modificador, fecha_modificacion)
             VALUES ("Profesores", "Update", USER(), NOW())
         ');
 
@@ -33,7 +33,7 @@ class TriggerCursos extends Migration
             CREATE TRIGGER trigger_delete_cursos
             AFTER DELETE ON cursos
             FOR EACH ROW
-            INSERT tablacambios_log (nombre_tabla, cambio, usuario_modificador, dato_modificado, campo_modificado, fecha_modificacion)
+            INSERT tablacambios_log (nombre_tabla, cambio, usuario_modificador, fecha_modificacion)
             VALUES ("Profesores", "Delete", USER(), NOW())
         ');
     }
@@ -50,4 +50,3 @@ class TriggerCursos extends Migration
         DB::unprepared('DROP TRIGGER IF EXISTS trigger_delete_cursos');
     }
 }
-//Cambios Limni

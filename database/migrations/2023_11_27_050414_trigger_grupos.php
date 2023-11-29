@@ -17,7 +17,7 @@ class TriggerGrupos extends Migration
             CREATE TRIGGER trigger_insert_grupos
             AFTER INSERT ON grupos
             FOR EACH ROW
-            INSERT INTO tablacambios_log (nombre_tabla, cambio, usuario_modificador, dato_modificado, campo_modificado, fecha_modificacion)
+            INSERT INTO tablacambios_log (nombre_tabla, cambio, usuario_modificador, fecha_modificacion)
             VALUES ("Profesores", "Insert", USER(), NOW())
         ');
 
@@ -25,7 +25,7 @@ class TriggerGrupos extends Migration
             CREATE TRIGGER trigger_update_grupos
             AFTER UPDATE ON grupos
             FOR EACH ROW
-            INSERT INTO tablacambios_log (nombre_tabla, cambio, usuario_modificador, dato_modificado, campo_modificado, fecha_modificacion)
+            INSERT INTO tablacambios_log (nombre_tabla, cambio, usuario_modificador, fecha_modificacion)
             VALUES ("Profesores", "Update", USER(), NOW())
         ');
 
@@ -33,7 +33,7 @@ class TriggerGrupos extends Migration
             CREATE TRIGGER trigger_delete_grupos
             AFTER DELETE ON grupos
             FOR EACH ROW
-            INSERT tablacambios_log (nombre_tabla, cambio, usuario_modificador, dato_modificado, campo_modificado, fecha_modificacion)
+            INSERT tablacambios_log (nombre_tabla, cambio, usuario_modificador, fecha_modificacion)
             VALUES ("Profesores", "Delete", USER(), NOW())
         ');
     }
@@ -50,4 +50,3 @@ class TriggerGrupos extends Migration
         DB::unprepared('DROP TRIGGER IF EXISTS trigger_delete_grupos');
     }
 }
-//Cambios Limni
